@@ -70,6 +70,14 @@ class User extends Authenticatable
         ];
     }
 
+    public function isSuperAdmin(): bool
+    {
+        return $this->role === 'super-admin';
+    }
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
     public function company():BelongsTo
     {
         return $this->belongsTo(Company::class);
