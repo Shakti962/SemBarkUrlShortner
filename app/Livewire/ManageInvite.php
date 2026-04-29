@@ -31,12 +31,19 @@ class ManageInvite extends Component
         $authUser = Auth::user();
         $this->validate();
         $sendTo = User::where('email', $this->email)->first();
-        Invite::create([
-            'send_by' => $authUser->id,
-            'send_to' => $sendTo->id,
-            'company_id' => $this->company_id,
-            'role' => $this->role
-        ]);
+        if (is_null($sendTo->company_id)){
+            $sendTo->update([
+                'company_id' => $this->company_id,
+                'role' => $this->role
+            ]);
+        }else{
+            Invite::create([
+                'send_by' => $authUser->id,
+                'send_to' => $sendTo->id,
+                'company_id' => $this->company_id,
+                'role' => $this->role
+            ]);
+        }
         $this->reset(['email']);
     }
     public function accept($id){
