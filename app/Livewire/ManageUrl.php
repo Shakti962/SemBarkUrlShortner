@@ -34,16 +34,19 @@ class ManageUrl extends Component
         if ($authUser->isSuperAdmin()) {
             $data = Url::with(['company', 'clicks' => fn($q) => $q->where('clicked_at', '>=', $date)])
                 ->where('created_at', '>=', $date)
+                ->orderByDesc('created_at')
                 ->paginate(10);
         } elseif ($authUser->isAdmin()) {
             $data = Url::with(['user', 'clicks' => fn($q) => $q->where('clicked_at', '>=', $date)])
                 ->where('created_at', '>=', $date)
                 ->where('company_id', $authUser->company_id)
+                ->orderByDesc('created_at')
                 ->paginate(10);
         } else {
             $data = Url::with(['user', 'clicks' => fn($q) => $q->where('clicked_at', '>=', $date)])
                 ->where('created_at', '>=', $date)
                 ->where('user_id', $authUser->id)
+                ->orderByDesc('created_at')
                 ->paginate(10);
         }
         return view('livewire.manage-url', ['urls' => $data]);

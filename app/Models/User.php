@@ -78,6 +78,10 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+    public function isMember(): bool
+    {
+        return $this->role === 'member';
+    }
     public function company():BelongsTo
     {
         return $this->belongsTo(Company::class);
@@ -89,5 +93,9 @@ class User extends Authenticatable
     public function urlClicks():HasMany
     {
         return $this->hasMany(UrlClick::class);
+    }
+    public function invites():HasMany
+    {
+        return $this->hasMany(Invite::class, 'send_to');
     }
 }

@@ -62,7 +62,7 @@
                                 {{ $url->original_url }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $url->clicks->count() }}
+                                {{ $url->clicks->sum('count') }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $url->company->name }}
@@ -107,7 +107,7 @@
                                 {{ $url->original_url }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $url->clicks->count() }}
+                                {{ $url->clicks->sum('count') }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $url->created_at->format("d M 'y") }}
@@ -149,7 +149,7 @@
                                 {{ $url->original_url }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $url->clicks->count() }}
+                                {{ $url->clicks->sum('count') }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $url->created_at->format("d M 'y") }}

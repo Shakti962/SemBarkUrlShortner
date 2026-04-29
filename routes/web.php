@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShortUrlController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,5 +16,8 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::view('url', 'manage-url')->name('url');
+    Route::view('url', 'manage-url')->name('url')->middleware('has.company');
+    Route::view('invite', 'invite')->name('invite')->middleware('has.company');
 });
+
+Route::get('{short_code}', ShortUrlController::class);

@@ -18,18 +18,21 @@ class DashboardData extends Component
         if ($authUser->isSuperAdmin()) {
             $data = Url::with(['company', 'clicks' => fn($q) => $q->where('clicked_at', '>=', $date)])
                 ->where('created_at', '>=', $date)
+                ->orderByDesc('created_at')
                 ->limit(5)->get();
-            $companies = Company::withCount(['users', 'urls', 'urlClicks'])->limit(5)->get();
+            $companies = Company::with('urlClicks')->withCount(['users', 'urls'])->get();
         } elseif ($authUser->isAdmin()) {
             $data = Url::with(['user', 'clicks' => fn($q) => $q->where('clicked_at', '>=', $date)])
                 ->where('company_id', $authUser->company_id)
+                ->orderByDesc('created_at')
                 ->limit(5)->get();
-            $team = User::withCount(['urls', 'urlClicks'])
+            $team = User::with('urlClicks')->withCount('urls')
                 ->where('company_id', $authUser->company_id)
-                ->limit(5)->get();
+                ->get();
         } else {
             $data = Url::with(['user', 'clicks' => fn($q) => $q->where('clicked_at', '>=', $date)])
                 ->where('user_id', $authUser->id)
+                ->orderByDesc('created_at')
                 ->limit(5)->get();
         }
         return view('livewire.dashboard-data', [

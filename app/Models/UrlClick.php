@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UrlClick extends Model
 {
+    public $timestamps = false;
     protected $fillable = [
         'user_id',
         'company_id',
