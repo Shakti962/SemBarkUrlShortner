@@ -4,7 +4,7 @@
 
 Follow these steps to set up the project on your local machine:
 
-1. **Clone the repository**: Pull the code from Git using `git clone <repository-url>`.
+1. **Clone the repository**: Pull the code from Git using `git clone https://github.com/Shakti962/SemBarkUrlShortner`.
 
 2. **Install PHP dependencies**: Run `composer install` to install all the required PHP packages.
 
@@ -14,7 +14,7 @@ Follow these steps to set up the project on your local machine:
 
 5. **Generate application key**: Run `php artisan key:generate` to generate the application key.
 
-6. **Run migrations and seeders**: Execute `php artisan migrate --seed` to set up the database tables and populate initial data.
+6. **Run migrations and seeders**: Execute `php artisan migrate:fresh --seed` or `php artisan migrate --seed` to set up the database tables and populate initial data.
 
 7. **Build assets**: Run `composer run dev` to compile and serve the frontend assets.
 
